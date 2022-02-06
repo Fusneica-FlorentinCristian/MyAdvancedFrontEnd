@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, db, logout } from "../firebase";
 import { query, collection, getDocs, where } from "firebase/firestore";
+import "../styles/Login.css";
 
 export default function Header() {
     
@@ -38,14 +39,16 @@ export default function Header() {
                 className="header--image"
             />
             <h2 className="header--title">Meme Generator</h2>
-        {user?
-        <h2>
-            Hello <Link to="/dashboard">{profileName}</Link>!
-        </h2>   
-        :
-            <h2>
-                Don't have an account? <Link to="/register">Register</Link> now.
-            </h2>}
+            {user ?
+                  <div>
+                    <h2 className="login__textBox">
+                        Hello <Link to="/dashboard">{profileName}</Link>!
+                    </h2>
+                  </div>
+                :
+                  <h2 className="login__textBox">
+                      Don't have an account? <Link to="/register">Register</Link> now.
+                  </h2>}
         </header>
     )
 }

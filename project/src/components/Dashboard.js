@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import "../styles/Dashboard.css";
+import { Link } from "react-router-dom";
 import { auth, db, logout } from "../firebase";
 import { query, collection, getDocs, where } from "firebase/firestore";
 
@@ -36,6 +37,9 @@ export default function Dashboard() {
          <button className="dashboard__btn" onClick={logout}>
           Logout
          </button>
+        <div>
+            Back <Link to="/">home</Link>.
+        </div> 
        </div>
      </div>
   );

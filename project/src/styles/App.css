@@ -65,6 +65,7 @@ main {
 
 .meme--image {
   max-width: 100%;
+  max-height: 370px;
   border-radius: 3px;
 }
 

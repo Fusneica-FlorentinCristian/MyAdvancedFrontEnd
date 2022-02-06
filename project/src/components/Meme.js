@@ -2,8 +2,8 @@ import React from "react"
 
 export default function Meme() {
     const [meme, setMeme] = React.useState({
-        topText: "",
-        bottomText: "",
+        topText: "ONE DOES NOT SIMPLY",
+        bottomText: "WALK INTO MORDOR",
         randomImage: "http://i.imgflip.com/1bij.jpg" 
     })
     const [allMemes, setAllMemes] = React.useState([])
