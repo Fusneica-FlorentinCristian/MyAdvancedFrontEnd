@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import "../styles/Dashboard.css";
 import { Link } from "react-router-dom";
 import { auth, db, logout } from "../firebase";
 import { query, collection, getDocs, where } from "firebase/firestore";
+import Header from "./Header"
 
 export default function Dashboard() {
   const [user, loading, error] = useAuthState(auth);
@@ -21,6 +22,7 @@ export default function Dashboard() {
       alert("An error occured while fetching user data");
     }
   };
+  const location = useLocation();
 
   useEffect(() => {
     if (loading) return;
@@ -29,7 +31,9 @@ export default function Dashboard() {
   }, [user, loading]);
 
   return (
-    <div className="dashboard">
+    <div>
+      <Header linkPath = {location.pathname}/>
+      <div className="dashboard">
        <div className="dashboard__container">
         Logged in as
          <div>{name}</div>
@@ -42,5 +46,8 @@ export default function Dashboard() {
         </div> 
        </div>
      </div>
+
+    </div>
+    
   );
 }

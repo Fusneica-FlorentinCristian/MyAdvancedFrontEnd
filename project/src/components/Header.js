@@ -5,11 +5,17 @@ import { auth, db, logout } from "../firebase";
 import { query, collection, getDocs, where } from "firebase/firestore";
 import "../styles/Login.css";
 
-export default function Header() {
+export default function Header(props) {
     
   const [user, loading, error] = useAuthState(auth);
   const [profileName, setProfileName] = React.useState("")
+  const [isHeaderInfo, setIsHeaderInfo] = React.useState(true)
 
+  useEffect(() => {
+  if(["/login","/register","/reset","/dashboard"].includes(props.linkPath))
+    setIsHeaderInfo(false)
+
+  },[])
 
   const fetchUserName = async () => {
     try {
@@ -39,7 +45,8 @@ export default function Header() {
                 className="header--image"
             />
             <h2 className="header--title">Meme Generator</h2>
-            {user ?
+            {isHeaderInfo && 
+              (user ?
                   <div>
                     <h2 className="login__textBox">
                         Hello <Link to="/dashboard">{profileName}</Link>!
@@ -48,7 +55,7 @@ export default function Header() {
                 :
                   <h2 className="login__textBox">
                       Don't have an account? <Link to="/register">Register</Link> now.
-                  </h2>}
+                  </h2>)}
         </header>
     )
 }
